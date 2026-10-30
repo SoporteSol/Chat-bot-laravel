@@ -1,0 +1,222 @@
+:root {
+    --bg: #fafafa;
+    --card: #ffffff;
+    --border: #e5e5e5;
+    --border-focus: #171717;
+    --text: #171717;
+    --text-muted: #737373;
+    --danger: #dc2626;
+    --radius: 8px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.auth-box {
+    width: 100%;
+    max-width: 360px;
+}
+
+.auth-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+}
+
+.brand-dot {
+    width: 9px;
+    height: 9px;
+    background-color: var(--text);
+    border-radius: 2px;
+}
+
+.auth-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 30px 24px;
+}
+
+.auth-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.field {
+    margin-bottom: 16px;
+}
+
+.field-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.field-link {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+.field-link:hover {
+    color: var(--text);
+    text-decoration: underline;
+}
+
+.input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+    width: 100%;
+    height: 38px;
+    padding: 0 12px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    color: var(--text);
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.form-control::placeholder {
+    color: #a3a3a3;
+}
+
+.form-control:focus {
+    border-color: var(--border-focus);
+}
+
+.form-control.has-error {
+    border-color: var(--danger);
+    background: #fef2f2;
+}
+
+.field-error {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--danger);
+    margin-top: 5px;
+}
+
+.toggle-pass {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-pass:hover {
+    color: var(--text);
+}
+
+.field-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 16px 0 20px;
+}
+
+.field-check input {
+    accent-color: var(--text);
+    cursor: pointer;
+}
+
+.field-check label {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.btn-submit {
+    width: 100%;
+    height: 38px;
+    background: var(--text);
+    color: #ffffff;
+    border: 1px solid var(--text);
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.btn-submit:hover {
+    background: #262626;
+}
+
+.btn-submit:active {
+    background: #000000;
+}
+
+.auth-bottom {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+}
+
+.auth-bottom a {
+    color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 500;
+}
+
+.alert-error {
+    padding: 10px 12px;
+    border-radius: var(--radius);
+    background: #fef2f2;
+    border: 1px solid #fee2e2;
+    color: var(--danger);
+    font-size: 0.8125rem;
+    margin-bottom: 16px;
+}
+
+.alert-success {
+    padding: 10px 12px;
+    border-radius: var(--radius);
+    background: #f0fdf4;
+    border: 1px solid #dcfce7;
+    color: #15803d;
+    font-size: 0.8125rem;
+    margin-bottom: 16px;
+}

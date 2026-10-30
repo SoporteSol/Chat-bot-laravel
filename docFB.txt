@@ -1,0 +1,297 @@
+Primeros pasos como Solution Partner
+
+Esta guía explica los pasos que los Solution Partners deben seguir para ofrecer la Cloud API a sus clientes. Hay cuatro etapas principales:
+
+Preparación y planificación
+Configuración de activos
+Firma de contratos
+Construcción de la integración
+
+Cuando termines, por favor mantente al día con las actualizaciones mensuales.
+
+Preparación y planificación {#prepare-plan}
+Lee la documentación
+
+Antes de empezar, lee la documentación para desarrolladores y la colección de Postman. Esto te ayudará a entender cómo funciona la Cloud API, incluyendo cómo comenzar y cómo migrar números.
+
+Planifica la incorporación y la migración {#plan-onboarding-migration}
+
+Usa Embedded Signup para incorporar nuevos clientes a la Cloud API. Si aún no lo has hecho, implementa Embedded Signup. Embedded Signup es la forma más rápida y sencilla de registrar clientes, y les permite empezar a enviar mensajes en menos de cinco minutos.
+
+Configuración de activos {#set-up-assets}
+
+Para usar la Cloud API, necesitas los siguientes activos:
+
+Activo	Instrucciones específicas
+Portafolio comercial	Puedes usar uno existente o crear uno nuevo. Guarda el ID del portafolio comercial.
+Cuenta de WhatsApp Business (WABA)	Consulta Crear una cuenta de WhatsApp Business para la API de WhatsApp Business para obtener ayuda.
+App de Meta	Si no tienes una app, debes crear una de tipo Business. Recuerda agregar un nombre para mostrar y un correo electrónico de contacto a tu app.
+
+Como Solution Partner, tu app debe pasar por App Review y solicitar acceso avanzado a los siguientes permisos:
+
+- whatsapp_business_management: Administra números de teléfono, plantillas de mensajes, registro y perfiles comerciales dentro de una cuenta de WhatsApp Business. Si tu app usa este permiso para acceder a WABA que no pertenecen a tu empresa, debes tener acceso avanzado. Sin él, las llamadas a la API devuelven el código de error 200. Para obtener acceso avanzado, envía tu app a App Review.
+- whatsapp_business_messaging: Se usa para enviar y recibir mensajes de usuarios de WhatsApp, y para subir y descargar multimedia dentro de una cuenta de WhatsApp Business. Para obtener este permiso, tu app debe pasar por App Review.
+- whatsapp_business_manage_events: Se usa para registrar eventos (como compras, artículos agregados al carrito, clientes potenciales y más) dentro de una cuenta de WhatsApp Business. Solicita este permiso únicamente si usas la Marketing Messages API para WhatsApp con la Conversions API. Para obtener este permiso, tu app debe pasar por App Review.
+
+Como Solution Partner, también puedes reutilizar la misma app de Meta con distintos clientes y WABA. Ten en cuenta, sin embargo, que cada app solo puede tener un endpoint de webhook y que cada app debe pasar por App Review.
+Usuario del sistema	Consulta Agregar usuarios del sistema a tu portafolio comercial para obtener ayuda.
+
+Actualmente, una app de Meta con los permisos whatsapp_business_messaging, whatsapp_business_management, whatsapp_business_manage_events y business_messaging tiene acceso como máximo a:
+
+- 1 usuario del sistema administrador
+- 1 usuario del sistema empleado
+
+Usa el usuario del sistema administrador para tu implementación en producción. Consulta Acerca del acceso al portafolio comercial para más información.
+Número de teléfono comercial	Es el número de teléfono que la empresa usará para enviar mensajes. Los números deben verificarse mediante SMS o llamada de voz.
+
+Si deseas usar tu propio número, agrega un número de teléfono en WhatsApp Manager y verifícalo con la Verify Code API.
+
+Si tus clientes desean usar sus propios números, agrega y verifica sus números mediante tu flujo de Embedded Signup.
+
+No hay límite en la cantidad de números de teléfono comerciales que pueden incorporarse a la Cloud API.
+Número de teléfono de consumidor	Es un número que actualmente usa la app de WhatsApp para consumidores. Este número recibirá los mensajes enviados por tu número de teléfono comercial.
+Firma de contratos {#sign-contracts}
+Aceptación de los términos de servicio
+
+Para acceder a la Cloud API de mensajería de WhatsApp Business, primero debes aceptar los Términos de servicio de la plataforma de WhatsApp Business en nombre de tu empresa.
+
+Para hacerlo, ve a WhatsApp Manager y acepta los Términos de servicio en el banner informativo.
+
+Para cualquier empresa nueva en la Cloud API, deberás aceptar los Términos de servicio antes de poder empezar a usarla. Las llamadas de registro fallarán hasta que aceptes los Términos de servicio.
+
+Nota: Quien debe aceptar los Términos de servicio eres tú, como desarrollador. Si eres Solution Partner, no necesitas que tus clientes los acepten.
+
+Construcción de la integración {#build-integration}
+Paso 1: Obtén el token de acceso del usuario del sistema {#get-access-token}
+
+Las llamadas a la Graph API usan tokens de acceso para la autenticación. Para más información, consulta Tokens de acceso. Usa tu usuario del sistema para generar el token.
+
+Para generar un token de acceso de usuario del sistema:
+
+Ve a Portafolio comercial > Configuración del negocio > Usuarios > Usuarios del sistema para ver el usuario del sistema que creaste.
+Haz clic en ese usuario y selecciona Agregar activos. Esta acción abre una nueva ventana.
+En Seleccionar tipo de activo, en el panel izquierdo, selecciona Apps. En Seleccionar activos, elige la app de Meta que quieres usar (tu app debe tener los permisos correctos). Activa Desarrollar app para esa app.
+Selecciona Guardar cambios para guardar tu configuración y volver a la pantalla principal del usuario del sistema.
+Ahora ya puedes generar tu token. En la pantalla principal del usuario del sistema, haz clic en Generar token y selecciona tu app de Meta.
+Después de seleccionar la app, verás una lista de permisos disponibles. Selecciona whatsapp_business_management, whatsapp_business_messaging y whatsapp_business_manage_events. Haz clic en Generar token.
+Se abre una nueva ventana con tu usuario del sistema, la app asignada y el token de acceso. Guarda tu token.
+Opcionalmente, puedes hacer clic en tu token para ver el Depurador de tokens. En el depurador deberías ver los permisos que seleccionaste. También puedes pegar tu token directamente en el Depurador de tokens de acceso.
+Paso 2: Configura los webhooks
+
+Con los webhooks configurados, puedes recibir notificaciones HTTP en tiempo real de la plataforma de WhatsApp Business. Esto significa que recibes una notificación cuando, por ejemplo, un cliente te envía un mensaje o hay cambios en tu cuenta de WhatsApp Business (WABA).
+
+Para configurar tu endpoint de webhook, necesitas crear un servidor web accesible desde internet con una URL que cumpla los requisitos de Meta y WhatsApp. Consulta nuestro documento de Webhooks para más información. Si necesitas un endpoint para pruebas, puedes desplegar una app de prueba que simplemente muestra en tu consola el contenido de los webhooks.
+
+Configuración de la app
+
+Una vez que el endpoint esté listo, configúralo para que lo use tu app de Meta:
+
+En el Panel de la app, ve a WhatsApp > Configuración y luego haz clic en el botón Editar.
+
+URL de devolución de llamada (Callback URL): Es la URL a la que Meta enviará los eventos. Consulta la guía Webhooks, Primeros pasos para obtener información sobre cómo crear la URL.
+Token de verificación (Verify Token): Es una cadena que defines tú al crear tu endpoint de webhook.
+
+Después de ingresar la información, haz clic en Verificar y guardar.
+
+Tras guardar, de vuelta en el panel de Configuración, haz clic en el botón Administrar y suscríbete a los campos individuales de webhook. Para recibir notificaciones de mensajes de clientes, asegúrate de suscribirte al campo de webhook messages.
+
+Solo necesitas configurar los webhooks una vez por cada aplicación que tengas. Puedes usar el mismo webhook para recibir varios tipos de eventos de varias cuentas de WhatsApp Business, o configurar una anulación (override). Para más información, consulta nuestra sección de Webhooks.
+
+Paso 3: Suscríbete a tu WABA {#subscribe-waba}
+
+Para asegurarte de recibir notificaciones de la cuenta correcta, suscribe tu app:
+
+html
+curl -X POST \
+'https://graph.facebook.com/v26.0/<WHATSAPP_BUSINESS_ACCOUNT_ID>/subscribed_apps' \
+-H 'Authorization: Bearer <ACCESS_TOKEN>'
+
+Si obtienes la siguiente respuesta, todos los eventos de webhook de los números de teléfono de esta cuenta se enviarán a tu endpoint de webhooks configurado.
+
+json
+{
+  "success": true
+}
+Paso 4: Obtén el ID del número de teléfono
+
+Para enviar mensajes, necesitas registrar el número de teléfono que quieres usar. Antes de poder registrarlo, necesitas obtener el ID del número. Para obtenerlo, realiza la siguiente llamada a la API:
+
+html
+curl -X GET \
+'https://graph.facebook.com/v26.0/<WHATSAPP_BUSINESS_ACCOUNT_ID>/phone_numbers' \
+-H 'Authorization: Bearer <ACCESS_TOKEN>'
+
+Si la solicitud es exitosa, la respuesta incluye todos los números de teléfono conectados a tu WABA:
+
+json
+{
+  "data": [
+    {
+      "verified_name": "Jasper's Market",
+      "display_phone_number": "+1 631-555-5555",
+      "id": "1906385232743451",
+      "quality_rating": "GREEN"
+    },
+    {
+      "verified_name": "Jasper's Ice Cream",
+      "display_phone_number": "+1 631-555-5556",
+      "id": "1913623884432103",
+      "quality_rating": "NA"
+    }
+  ]
+}
+
+Guarda el ID del número de teléfono que quieres registrar. Consulta Leer números de teléfono para más información sobre este endpoint.
+
+Excepción por migración
+
+Si estás migrando un número de teléfono de la On-Premises API a la Cloud API, hay pasos adicionales que debes realizar antes de registrar un número de teléfono en la Cloud API. Consulta Migrar de la On-Premises API a la Cloud API para ver el proceso completo.
+
+Paso 5: Registra el número de teléfono
+
+Con el ID del número de teléfono en mano, puedes registrarlo. En la llamada de registro a la API realizas dos acciones al mismo tiempo:
+
+Registrar el teléfono.
+Habilitar la verificación en dos pasos estableciendo un código de registro de 6 dígitos. Este código lo defines tú. Guárdalo y memorízalo, ya que se te puede solicitar más adelante.
+
+Advertencia: Configurar la verificación en dos pasos es un requisito para usar la Cloud API. Si no la configuras, recibirás un mensaje de error de incorporación:
+
+Solicitud de ejemplo:
+
+html
+curl -X POST \
+'https://graph.facebook.com/v26.0/<FROM_PHONE_NUMBER_ID>/register' \
+-H 'Authorization: Bearer <ACCESS_TOKEN>' \
+-H 'Content-Type: application/json' \
+-d '{"messaging_product": "whatsapp","pin": "<6_DIGIT_PIN>"}'
+
+Respuesta de ejemplo:
+
+json
+{
+  "success": true
+}
+Usuarios de Embedded Signup
+
+Un número de teléfono debe registrarse dentro de los 14 días posteriores a completar el flujo de Embedded Signup. Si un número no se registra durante ese plazo, el teléfono deberá pasar nuevamente por el flujo de Embedded Signup antes de poder registrarse.
+
+Paso 6: Recibe un mensaje desde la app de consumidor
+
+Una vez que los clientes participantes envían un mensaje a tu empresa, obtienes 24 horas de mensajes gratuitos con ellos. Ese periodo se llama ventana de atención al cliente. Para fines de prueba, habilita esta ventana para poder enviar todos los mensajes que quieras.
+
+Desde una app personal de WhatsApp en iOS o Android, envía un mensaje al número de teléfono que acabas de registrar. Una vez enviado, deberías recibir en tu webhook un mensaje entrante con una notificación en el siguiente formato.
+
+json
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "102290129340398",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "16315551234",
+              "phone_number_id": "PHONE_NUMBER_ID"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "Kerry Fisher"
+                },
+                "wa_id": "16315555555"
+              }
+            ],
+            "messages": [
+              {
+                "from": "16315555555",
+                "id": "wamid.ABGGFlA5FpafAgo6tHcNmNjXmuSf",
+                "timestamp": "1602139392",
+                "text": {
+                  "body": "Hello!"
+                },
+                "type": "text"
+                }
+            ]
+          },
+        "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+Paso 7: Envía un mensaje de prueba
+
+Una vez que hayas habilitado la ventana de atención al cliente, puedes enviar un mensaje de prueba al número de consumidor que usaste en el paso anterior. Para hacerlo, realiza la siguiente llamada a la API:
+
+html
+curl -X  POST \
+'https://graph.facebook.com/v26.0/<FROM_PHONE_NUMBER_ID>/messages' \
+-H 'Authorization: Bearer <ACCESS_TOKEN>' \
+-H 'Content-Type: application/json' \
+-d '{"messaging_product": "whatsapp", "to": "16315555555","text": {"body" : "hello world!"}}'
+
+Si tu llamada es exitosa, la respuesta incluirá un ID de mensaje. Usa ese ID para dar seguimiento al progreso de tus mensajes mediante webhooks. La longitud máxima del ID es de 128 caracteres.
+
+Respuesta de ejemplo:
+
+json
+{
+  "id":"wamid.gBGGFlaCGg0xcvAdgmZ9plHrf2Mh-o"
+}
+
+Nota: Con la Cloud API ya no existe una forma de verificar explícitamente si un número de teléfono tiene un ID de WhatsApp. Para enviar un mensaje a alguien con la Cloud API, simplemente envíalo directamente al número de teléfono del usuario de WhatsApp después de que haya dado su consentimiento (opt-in). Consulta Envío de mensajes.
+
+Incorpora a usuarios de la app WhatsApp Business
+
+Si tus clientes ya usan la app WhatsApp Business, puedes configurar Embedded Signup para incorporarlos con su cuenta y número de teléfono existentes. Los clientes incorporados pueden usar tu app para enviar mensajes a gran escala y, al mismo tiempo, seguir usando la app WhatsApp Business para conversaciones uno a uno.
+
+Mantente al día con las actualizaciones mensuales {#keep-up-with-monthly-updates}
+
+Las actualizaciones de la Cloud API se publican el primer martes de cada mes. Estas actualizaciones incluyen nuevas funciones y mejoras. No necesitas hacer nada para usar las nuevas funciones, ya que la Cloud API se actualiza automáticamente.
+
+Preguntas frecuentes
+Preguntas frecuentes generales
+
+¿Qué empresa proporciona la Cloud API?
+
+WhatsApp desarrolla y opera la API de WhatsApp Business, que permite a las empresas comunicarse con usuarios consumidores de WhatsApp en la red de WhatsApp. Cuando usas la Cloud API, Meta aloja la API de WhatsApp Business por ti y proporciona un endpoint para el servicio de WhatsApp para tus comunicaciones entrantes y salientes de WhatsApp.
+
+¿Hay costos adicionales por la Cloud API?
+
+El acceso a la Cloud API es gratuito, y esperamos que genere ahorros adicionales para los desarrolladores, ya que Meta aloja y mantiene la Cloud API.
+
+Preguntas frecuentes sobre la implementación técnica
+
+¿Cuál es la arquitectura de la Cloud API?
+
+La arquitectura de la Cloud API simplifica de forma significativa los requisitos operativos y de infraestructura del Solution Partner para integrarse con la plataforma de WhatsApp Business. Primero, elimina los requisitos de infraestructura para ejecutar contenedores Docker de la API de Business (ahorro en CAPEX). Segundo, elimina la necesidad de las responsabilidades operativas de gestionar el despliegue (ahorro en OPEX).
+
+¿Cómo funciona la recuperación ante desastres? Si una región no está disponible, ¿cuánto tiempo toma mover los mensajes a otra región?
+
+Contaremos con recuperación ante desastres y replicación de datos en múltiples regiones. El tiempo de inactividad esperado estaría dentro de nuestro SLA y, por lo general, es del orden de menos de un minuto a menos de cinco minutos.
+
+Preguntas frecuentes sobre privacidad y seguridad de los datos
+
+¿Dónde están los servidores de la Cloud API?
+
+La Cloud API procesa los mensajes en servidores ubicados en centros de datos de Meta. Si una empresa opta por usar el almacenamiento local de la Cloud API (Cloud API Local Storage), los datos de los mensajes se almacenan en centros de datos ubicados en otro país designado.
+
+¿La Cloud API tiene cifrado de extremo a extremo? ¿Cuál es el modelo de cifrado?
+
+Consulta Descripción general de la Cloud API, Cifrado.
+
+¿Qué sucede con los datos de los mensajes en reposo? ¿Por cuánto tiempo se almacenan?
+
+Los mensajes de la Cloud API en reposo están cifrados. Los mensajes tienen un periodo máximo de retención de 30 días para poder ofrecer las funciones básicas del servicio de la Cloud API, por ejemplo, las retransmisiones.
+
+¿Meta tiene acceso a las claves de cifrado?
+
+Para poder enviar y recibir mensajes a través de la Cloud API, esta administra las claves de cifrado y descifrado en nombre de la empresa. Para más detalles, consulta el documento técnico WhatsApp Encryption Overview.
+
+Preguntas frecuentes sobre cumplimiento normativo
+
+¿Cómo cumple la Cloud API con las leyes regionales de protección de datos (como GDPR, LGPD y PDPB)?
+
+Meta se toma muy en serio la protección de datos y la privacidad de las personas, y cumplimos con los requisitos legales, de la industria y regulatorios aplicables en materia de protección de datos, así como con las mejores prácticas del sector. Los clientes de la Cloud API deben cumplir con sus propias obligaciones bajo las leyes de protección de datos, como el Reglamento General de Protección de Datos (GDPR). Visita nuestro Centro de cumplimiento de mensajería empresarial de Meta para obtener más información.

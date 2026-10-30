@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Navbar flotante minimalista</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Ajustes pequeños que complementan Tailwind para reproducir la referencia. */
+    * { -webkit-tap-highlight-color: transparent; }
+    body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .toolbar-shadow {
+      box-shadow: 0 7px 15px rgba(0, 0, 0, .075), 0 1px 3px rgba(0, 0, 0, .045);
+    }
+    .tool-button { transition: background-color .18s ease, transform .18s ease, color .18s ease; }
+    .tool-button:active { transform: scale(.92); }
+    .tool-button:focus-visible { outline: 2px solid #a3a3a3; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-white text-neutral-900">
+  <main class="relative min-h-screen w-full overflow-hidden">
+    <!-- Barra flotante inspirada en la referencia -->
+    <nav aria-label="Barra de herramientas" class="toolbar-shadow fixed left-1/2 top-[47.5%] z-50 flex h-12 w-[236px] -translate-x-1/2 -translate-y-1/2 items-center justify-between rounded-full border border-neutral-200/80 bg-white px-[7px]">
+      <!-- Cursor -->
+      <button type="button" class="tool-button group flex h-9 w-9 items-center justify-center rounded-full text-neutral-900 hover:bg-neutral-100" aria-label="Seleccionar" title="Seleccionar" data-action="Seleccionar">
+        <svg viewBox="0 0 24 24" class="h-[17px] w-[17px]" fill="none" aria-hidden="true">
+          <path d="M6.8 3.8 17.7 14l-5.1.5-2.7 4.3L6.8 3.8Z" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"/>
+          <path d="m12.5 14.5 2.3 4.4 2-1-2.3-4.3" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <!-- Colaboradores -->
+      <button type="button" class="tool-button group flex h-9 w-9 items-center justify-center rounded-full text-neutral-900 hover:bg-neutral-100" aria-label="Personas" title="Personas" data-action="Personas">
+        <svg viewBox="0 0 24 24" class="h-[17px] w-[17px]" fill="none" aria-hidden="true">
+          <path d="M16.2 20v-1.4a3.1 3.1 0 0 0-3.1-3.1H7.8a3.1 3.1 0 0 0-3.1 3.1V20" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"/>
+          <circle cx="10.45" cy="8" r="3.1" stroke="currentColor" stroke-width="1.55"/>
+          <path d="M16 4.9a3.1 3.1 0 0 1 0 6.1M18.1 15.6a3.2 3.2 0 0 1 2.2 3V20" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <!-- Acción principal -->
+      <button type="button" class="tool-button flex h-8 w-8 items-center justify-center rounded-full bg-neutral-900 text-white shadow-sm hover:bg-neutral-700" aria-label="Crear nuevo" title="Crear nuevo" data-action="Crear nuevo">
+        <svg viewBox="0 0 24 24" class="h-[18px] w-[18px]" fill="none" aria-hidden="true">
+          <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.65" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <!-- Comentarios -->
+      <button type="button" class="tool-button group flex h-9 w-9 items-center justify-center rounded-full text-neutral-900 hover:bg-neutral-100" aria-label="Comentarios" title="Comentarios" data-action="Comentarios">
+        <svg viewBox="0 0 24 24" class="h-[17px] w-[17px]" fill="none" aria-hidden="true">
+          <path d="M5 5.8a1.4 1.4 0 0 1 1.4-1.4h11.2A1.4 1.4 0 0 1 19 5.8v8.7a1.4 1.4 0 0 1-1.4 1.4H9l-4 3v-13Z" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <!-- Menú -->
+      <button type="button" class="tool-button group flex h-9 w-9 items-center justify-center rounded-full text-neutral-900 hover:bg-neutral-100" aria-label="Abrir menú" title="Menú" data-action="Menú">
+        <svg viewBox="0 0 24 24" class="h-[18px] w-[18px]" fill="none" aria-hidden="true">
+          <path d="M5.5 7h13M5.5 12h13M5.5 17h13" stroke="currentColor" stroke-width="1.65" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mensaje discreto para demostrar que los botones funcionan -->
+    <div id="feedback" role="status" aria-live="polite" class="pointer-events-none fixed bottom-8 left-1/2 -translate-x-1/2 translate-y-2 rounded-full border border-neutral-200 bg-white px-4 py-2 text-xs font-medium text-neutral-700 opacity-0 shadow-lg transition duration-200"></div>
+  </main>
+
+  <script>
+    const feedback = document.getElementById('feedback');
+    let feedbackTimer;
+
+    document.querySelectorAll('[data-action]').forEach((button) => {
+      button.addEventListener('click', () => {
+        feedback.textContent = button.dataset.action;
+        feedback.classList.remove('opacity-0', 'translate-y-2');
+        feedback.classList.add('opacity-100', 'translate-y-0');
+        window.clearTimeout(feedbackTimer);
+        feedbackTimer = window.setTimeout(() => {
+          feedback.classList.add('opacity-0', 'translate-y-2');
+          feedback.classList.remove('opacity-100', 'translate-y-0');
+        }, 1300);
+      });
+    });
+  </script>
+</body>
+</html>

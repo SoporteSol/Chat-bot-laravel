@@ -1,0 +1,12 @@
+/* Estilos globales del dashboard y CRM */
+
+@import url('dashboard-base.css');
+@import url('dashboard-utilities.css');
+@import url('dashboard-components.css');
+@import url('blueprint-canvas.css');
+@import url('live-chat.css');
+@import url('floating-navbar.css');
+@import url('sidebar.css');
+@import url('toast.css');
+@import url('glass-ios.css');
+@import url('crm-suite.css');

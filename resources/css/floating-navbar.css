@@ -1,0 +1,245 @@
+/* Barra de opciones flotante central (controlada desde el sidebar lateral) */
+.floating-navbar-container {
+    position: fixed;
+    top: 14px;
+    left: calc(var(--sidebar-width, 260px) + (100vw - var(--sidebar-width, 260px)) / 2);
+    transform: translateX(-50%);
+    z-index: 1045;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    pointer-events: none;
+    max-width: calc(100vw - var(--sidebar-width, 260px) - 40px);
+}
+
+.floating-dock-wrapper {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(226, 232, 240, 0.95);
+    border-radius: 9999px;
+    padding: 4px 8px;
+    box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), 
+                0 4px 10px -2px rgba(15, 23, 42, 0.04), 
+                0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floating-dock-wrapper:hover {
+    box-shadow: 0 16px 38px -6px rgba(15, 23, 42, 0.12), 
+                0 6px 14px -2px rgba(15, 23, 42, 0.06);
+    transform: translateY(-1px);
+}
+
+/* Indicador de vista activa */
+.floating-view-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 10px;
+    height: 30px;
+    background: #f1f5f9;
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #0f172a;
+    user-select: none;
+    letter-spacing: -0.01em;
+}
+
+.floating-view-indicator i {
+    font-size: 0.82rem;
+}
+
+/* Divisor elegante entre el indicador y las opciones */
+.floating-dock-divider {
+    width: 1px;
+    height: 18px;
+    background: rgba(203, 213, 225, 0.8);
+    margin: 0 2px;
+    flex-shrink: 0;
+}
+
+/* Opciones de la vista activa */
+.floating-tools-capsule {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.floating-context-group {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.floating-context-group.d-none {
+    display: none !important;
+}
+
+.tool-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: 30px;
+    padding: 0 11px;
+    border-radius: 9999px;
+    background: transparent;
+    border: none;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    outline: none;
+    font-size: 0.76rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tool-button i {
+    font-size: 12px;
+    line-height: 1;
+    transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.tool-button:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    transform: translateY(-1px);
+}
+
+.tool-button:active {
+    transform: scale(0.94);
+}
+
+.tool-button.active {
+    background: #0f172a !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.22);
+}
+
+.tool-button.active i {
+    color: #ffffff !important;
+}
+
+.tool-button-primary {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: 30px;
+    padding: 0 12px;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 0.76rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.32);
+    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    outline: none;
+    white-space: nowrap;
+}
+
+.tool-button-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.45);
+    color: #ffffff;
+}
+
+.tool-button-primary:active {
+    transform: scale(0.94);
+}
+
+/* Tooltips de soporte */
+.tool-button[data-tooltip],
+.tool-button-primary[data-tooltip] {
+    position: relative;
+}
+
+.tool-button[data-tooltip]::after,
+.tool-button-primary[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-4px);
+    background: #0f172a;
+    color: #ffffff;
+    padding: 4px 9px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    z-index: 1060;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.tool-button[data-tooltip]:hover::after,
+.tool-button-primary[data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Feedback pill flotante */
+.floating-feedback {
+    background: #0f172a;
+    color: #ffffff;
+    padding: 5px 14px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+}
+
+.floating-feedback.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Evitar traslape en pantallas medianas o móviles */
+@media (max-width: 991px) {
+    .floating-navbar-container {
+        top: auto;
+        bottom: 16px;
+        left: 50%;
+        max-width: 95vw;
+    }
+    .tool-button[data-tooltip]::after,
+    .tool-button-primary[data-tooltip]::after {
+        top: auto;
+        bottom: calc(100% + 8px);
+    }
+}
+
+@media (max-width: 900px) {
+    .tool-button span,
+    .tool-button-primary span {
+        display: none;
+    }
+    .tool-button,
+    .tool-button-primary {
+        padding: 0 10px;
+    }
+}

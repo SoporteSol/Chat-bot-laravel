@@ -1,0 +1,496 @@
+/* Clases de flexbox */
+.d-flex {
+    display: flex !important;
+}
+
+.d-inline-flex {
+    display: inline-flex !important;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+.d-inline {
+    display: inline !important;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+
+.flex-row {
+    flex-direction: row !important;
+}
+
+.flex-wrap {
+    flex-wrap: wrap !important;
+}
+
+.flex-nowrap {
+    flex-wrap: nowrap !important;
+}
+
+.flex-1 {
+    flex: 1 1 0% !important;
+}
+
+.flex-shrink-0 {
+    flex-shrink: 0 !important;
+}
+
+.min-w-0 {
+    min-width: 0 !important;
+}
+
+.justify-content-start {
+    justify-content: flex-start !important;
+}
+
+.justify-content-end {
+    justify-content: flex-end !important;
+}
+
+.justify-content-center {
+    justify-content: center !important;
+}
+
+.justify-content-between {
+    justify-content: space-between !important;
+}
+
+.justify-content-around {
+    justify-content: space-around !important;
+}
+
+.align-items-start {
+    align-items: flex-start !important;
+}
+
+.align-items-end {
+    align-items: flex-end !important;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+.align-items-stretch {
+    align-items: stretch !important;
+}
+
+/* Espaciado gap */
+.gap-1 {
+    gap: 4px !important;
+}
+
+.gap-2 {
+    gap: 8px !important;
+}
+
+.gap-3 {
+    gap: 14px !important;
+}
+
+.gap-4 {
+    gap: 20px !important;
+}
+
+/* Márgenes y rellenos */
+.m-0 {
+    margin: 0 !important;
+}
+
+.mt-1 {
+    margin-top: 4px !important;
+}
+
+.mt-2 {
+    margin-top: 8px !important;
+}
+
+.mt-3 {
+    margin-top: 14px !important;
+}
+
+.mt-4 {
+    margin-top: 20px !important;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.mb-1 {
+    margin-bottom: 4px !important;
+}
+
+.mb-2 {
+    margin-bottom: 8px !important;
+}
+
+.mb-3 {
+    margin-bottom: 14px !important;
+}
+
+.mb-4 {
+    margin-bottom: 20px !important;
+}
+
+.mr-1 {
+    margin-right: 4px !important;
+}
+
+.mr-2 {
+    margin-right: 8px !important;
+}
+
+.mr-3 {
+    margin-right: 14px !important;
+}
+
+.ml-1 {
+    margin-left: 4px !important;
+}
+
+.ml-2 {
+    margin-left: 8px !important;
+}
+
+.ml-3 {
+    margin-left: 14px !important;
+}
+
+.mx-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+
+.p-2 {
+    padding: 8px !important;
+}
+
+.p-3 {
+    padding: 14px !important;
+}
+
+.p-4 {
+    padding: 22px !important;
+}
+
+.py-1 {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+
+.py-2 {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+}
+
+.py-3 {
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+}
+
+.py-5 {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+}
+
+.px-2 {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+}
+
+.px-3 {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+}
+
+.px-4 {
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+}
+
+/* Tipografía y textos */
+.text-left {
+    text-align: left !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap !important;
+}
+
+.text-primary {
+    color: var(--brand-indigo) !important;
+}
+
+.text-success {
+    color: var(--status-success) !important;
+}
+
+.text-danger {
+    color: var(--status-danger) !important;
+}
+
+.text-warning {
+    color: var(--status-warning) !important;
+}
+
+.text-info {
+    color: var(--status-info) !important;
+}
+
+.text-secondary {
+    color: var(--text-secondary) !important;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.text-dark {
+    color: var(--text-primary) !important;
+}
+
+.font-weight-normal {
+    font-weight: 400 !important;
+}
+
+.font-weight-500 {
+    font-weight: 500 !important;
+}
+
+.font-weight-600 {
+    font-weight: 600 !important;
+}
+
+.font-weight-700,
+.font-weight-bold {
+    font-weight: 700 !important;
+}
+
+.font-weight-800 {
+    font-weight: 800 !important;
+}
+
+.font-mono,
+.text-monospace {
+    font-family: var(--font-mono) !important;
+}
+
+.small,
+small {
+    font-size: 0.8125rem !important;
+}
+
+/* Sombras y bordes redondeados */
+.shadow-none {
+    box-shadow: none !important;
+}
+
+.shadow-sm {
+    box-shadow: var(--shadow-subtle) !important;
+}
+
+.shadow {
+    box-shadow: var(--shadow-card) !important;
+}
+
+.shadow-md {
+    box-shadow: var(--shadow-hover) !important;
+}
+
+.rounded-circle {
+    border-radius: 50% !important;
+}
+
+.rounded {
+    border-radius: var(--radius-md) !important;
+}
+
+.rounded-lg {
+    border-radius: var(--radius-lg) !important;
+}
+
+.text-decoration-none {
+    text-decoration: none !important;
+}
+
+/* Tarjetas de métricas y KPIs */
+.metric-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 20px 22px;
+    box-shadow: var(--shadow-card);
+    transition: all var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.metric-card:hover {
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.metric-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.metric-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+}
+
+.metric-hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.metric-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.metric-icon-indigo {
+    background-color: var(--brand-indigo-subtle);
+    color: var(--brand-indigo);
+    border: 1px solid rgba(79, 70, 229, 0.12);
+}
+
+.metric-icon-emerald {
+    background-color: var(--brand-wa-subtle);
+    color: var(--brand-wa);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.metric-icon-blue {
+    background-color: var(--status-info-bg);
+    color: var(--status-info);
+    border: 1px solid rgba(2, 132, 199, 0.12);
+}
+
+/* Tarjeta de instancia / empresa */
+.company-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: all var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.company-card:hover {
+    border-color: #cbd5e1;
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-3px);
+}
+
+.company-card-header {
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-subtle);
+    background-color: #ffffff;
+}
+
+.company-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+    color: var(--brand-indigo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.05rem;
+    border: 1px solid rgba(79, 70, 229, 0.15);
+    flex-shrink: 0;
+}
+
+.company-meta {
+    margin-left: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+.company-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.company-phone {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-mono);
+}
+
+.company-card-body {
+    padding: 18px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.company-info-row {
+    background-color: var(--bg-subtle);
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.78rem;
+    border: 1px solid rgba(226, 232, 240, 0.6);
+}
+
